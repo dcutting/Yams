@@ -380,8 +380,8 @@ fileprivate extension String {
         let digits = scalar.components(separatedBy: ":").flatMap({ T($0) }).reversed()
         var base: T = 1
         var value: T = 0
-        digits.forEach {
-            value += $0 * base
+        for digit in digits {
+            value += digit * base
             base *= 60
         }
         return sign * value

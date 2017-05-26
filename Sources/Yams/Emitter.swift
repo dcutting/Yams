@@ -369,7 +369,8 @@ extension Emitter {
                 mapping_style)
         }
         try emit(&event)
-        try mapping.forEach { (key, value) in
+        try mapping.forEach { arg in
+            let (key, value) = arg
             try self.serializeNode(key)
             try self.serializeNode(value)
         }

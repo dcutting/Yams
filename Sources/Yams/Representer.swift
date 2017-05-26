@@ -115,22 +115,56 @@ private let floatFormatter = numberFormatter(with: 7)
 // TODO: Support `Float80`
 //extension Float80: NodeRepresentable {}
 
-extension Integer {
+extension Int: NodeRepresentable {
     public func represented() throws -> Node {
         return Node(String(describing: self), Tag(.int))
     }
 }
-
-extension Int: NodeRepresentable {}
-extension Int16: NodeRepresentable {}
-extension Int32: NodeRepresentable {}
-extension Int64: NodeRepresentable {}
-extension Int8: NodeRepresentable {}
-extension UInt: NodeRepresentable {}
-extension UInt16: NodeRepresentable {}
-extension UInt32: NodeRepresentable {}
-extension UInt64: NodeRepresentable {}
-extension UInt8: NodeRepresentable {}
+extension Int16: NodeRepresentable {
+    public func represented() throws -> Node {
+        return Node(String(describing: self), Tag(.int))
+    }
+}
+extension Int32: NodeRepresentable {
+    public func represented() throws -> Node {
+        return Node(String(describing: self), Tag(.int))
+    }
+}
+extension Int64: NodeRepresentable {
+    public func represented() throws -> Node {
+        return Node(String(describing: self), Tag(.int))
+    }
+}
+extension Int8: NodeRepresentable {
+    public func represented() throws -> Node {
+        return Node(String(describing: self), Tag(.int))
+    }
+}
+extension UInt: NodeRepresentable {
+    public func represented() throws -> Node {
+        return Node(String(describing: self), Tag(.int))
+    }
+}
+extension UInt16: NodeRepresentable {
+    public func represented() throws -> Node {
+        return Node(String(describing: self), Tag(.int))
+    }
+}
+extension UInt32: NodeRepresentable {
+    public func represented() throws -> Node {
+        return Node(String(describing: self), Tag(.int))
+    }
+}
+extension UInt64: NodeRepresentable {
+    public func represented() throws -> Node {
+        return Node(String(describing: self), Tag(.int))
+    }
+}
+extension UInt8: NodeRepresentable {
+    public func represented() throws -> Node {
+        return Node(String(describing: self), Tag(.int))
+    }
+}
 
 private func represent(_ value: Any) throws -> Node {
     if let string = value as? String {
@@ -161,7 +195,10 @@ extension Array: NodeRepresentable {
 
 extension Dictionary: NodeRepresentable {
     public func represented() throws -> Node {
-        let pairs = try map { (key: try represent($0), value: try represent($1)) }
+        let pairs = try map { keyValue -> (key: Node, value: Node) in
+            let (key, value) = keyValue
+            return (key: try represent(key), value: try represent(value))
+        }
         return Node(pairs.sorted { $0.key < $1.key }, Tag(.map))
     }
 }
