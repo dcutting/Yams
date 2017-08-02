@@ -280,7 +280,7 @@ import Yams
     /// A simple on-off switch type that encodes as a single Bool value.
     private enum Switch: Codable {
         case off
-        case on
+        case on // swiftlint:disable:this identifier_name
 
         init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
@@ -429,13 +429,13 @@ import Yams
     private class Employee: Person {
         let id: Int
 
-        init(name: String, email: String, website: URL? = nil, id: Int) {
+        init(name: String, email: String, website: URL? = nil, id: Int) { // swiftlint:disable:this identifier_name
             self.id = id
             super.init(name: name, email: email, website: website)
         }
 
         enum CodingKeys: String, CodingKey {
-            case id
+            case id // swiftlint:disable:this identifier_name
         }
 
         required init(from decoder: Decoder) throws {
@@ -572,9 +572,9 @@ import Yams
         }
 
         enum TopLevelCodingKeys: Int, CodingKey {
-            case a
-            case b
-            case c
+            case a // swiftlint:disable:this identifier_name
+            case b // swiftlint:disable:this identifier_name
+            case c // swiftlint:disable:this identifier_name
         }
 
         enum IntermediateCodingKeys: Int, CodingKey {
@@ -598,7 +598,7 @@ import Yams
             }
         }
 
-        func _testNestedContainers(in encoder: Encoder, baseCodingPath: [CodingKey]) {
+        func _testNestedContainers(in encoder: Encoder, baseCodingPath: [CodingKey]) { // swiftlint:disable:this identifier_name
             expectEqualPaths(encoder.codingPath, baseCodingPath, "New encoder has non-empty codingPath.")
 
             // codingPath should not change upon fetching a non-nested container.
