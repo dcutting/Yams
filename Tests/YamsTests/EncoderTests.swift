@@ -71,10 +71,8 @@ import Yams
             // Mapping is a class which encodes as a dictionary through a single value container.
             let mapping = Mapping.testValue
             _testRoundTrip(of: mapping, expectedYAML: """
-                Apple:
-                  relative: http://apple.com
-                localhost:
-                  relative: http://127.0.0.1
+                Apple: http://apple.com
+                localhost: http://127.0.0.1
 
                 """)
         }
@@ -164,8 +162,7 @@ import Yams
             _testRoundTrip(of: TopLevelWrapper(decimal), expectedYAML: expectedYAML)
 
             // Optional Decimals should encode the same way.
-            // FIXME: following test is blocked by https://bugs.swift.org/browse/SR-5206
-//            _testRoundTrip(of: OptionalTopLevelWrapper(decimal), expectedYAML: expectedYAML)
+            _testRoundTrip(of: OptionalTopLevelWrapper(decimal), expectedYAML: expectedYAML)
         }
 
         func testInterceptURL() {
@@ -175,8 +172,7 @@ import Yams
             _testRoundTrip(of: TopLevelWrapper(url), expectedYAML: expectedYAML)
 
             // Optional URLs should encode the same way.
-            // FIXME: following test is blocked by https://bugs.swift.org/browse/SR-5206
-//            _testRoundTrip(of: OptionalTopLevelWrapper(url), expectedYAML: expectedYAML)
+            _testRoundTrip(of: OptionalTopLevelWrapper(url), expectedYAML: expectedYAML)
         }
 
         // MARK: - Helper Functions
