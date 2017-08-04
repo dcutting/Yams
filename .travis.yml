@@ -43,8 +43,13 @@ matrix:
       env:
         - JOB=Xcode9
         - SWIFT_VERSION=4.0
+        - SWIFT_SNAPSHOT=swift-DEVELOPMENT-SNAPSHOT-2017-08-03-a
+        - TOOLCHAINS=swift
       os: osx
       osx_image: xcode9
+      before_install:
+        - curl https://swift.org/builds/development/xcode/$SWIFT_SNAPSHOT/$SWIFT_SNAPSHOT-osx.pkg -o swift.pkg
+        - sudo installer -pkg swift.pkg -target /
     - script:
         - swift test
         - swift test -Xswiftc -DUSE_UTF8
@@ -87,7 +92,7 @@ matrix:
         - docker run -v `pwd`:`pwd` -w `pwd` --rm $DOCKER_IMAGE swift test -Xswiftc -DUSE_UTF8
       env:
         - JOB=Docker
-        - DOCKER_IMAGE=norionomura/swift:4020170725a
+        - DOCKER_IMAGE=norionomura/swift:20170803a
       sudo: required
       services: docker
 notifications:
